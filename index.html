@@ -4,15 +4,22 @@
     <head>
         <meta charset="utf-8">
 
-        <title>reveal.js - The HTML Presentation Framework</title>
+        <title>ECMAScript7</title>
 
-        <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-        <meta name="author" content="Hakim El Hattab">
+        <meta name="description" content="Prezentacja na temat ECMAScript7">
+        <meta name="author" content="Krzysztof Syrytczyk krzysztof.syrytczyk@gmail.com">
 
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="icon" type="image/png" href="assets/images/favicon-196x196.png" sizes="196x196"/>
+        <link rel="icon" type="image/png" href="assets/images/favicon-96x96.png" sizes="96x96"/>
+        <link rel="icon" type="image/png" href="assets/images/favicon-32x32.png" sizes="32x32"/>
+        <link rel="icon" type="image/png" href="assets/images/favicon-16x16.png" sizes="16x16"/>
+        <link rel="icon" type="image/png" href="assets/images/favicon-128.png" sizes="128x128"/>
+
 
         <link rel="stylesheet" href="css/reveal.css">
         <link rel="stylesheet" href="css/theme/beige.css" id="theme">
@@ -98,66 +105,77 @@
                 </section>
 
 
-                <section>
+                <section id="examples">
+
                     <section>
                         <h1>Examples</h1>
                     </section>
 
-<!--CANDIDATE-->
-<section>
-<h2>String.prototype.trimLeft</h2>
-<p>left trims the string</p>
-<p>Stage: Candidate</p>
-<pre><code class="javascript" data-trim contenteditable>
-' \t \n LeftTrim   \t\n'.trimLeft(); // 'LeftTrim   \t\n';
-</code></pre>
-</section>
+                    <!--CANDIDATE-->
+                    <section>
+                        <header>
+                            <h2>String.prototype.trimLeft</h2>
+                            <p style="margin-bottom:5px">left trims the string</p>
+                            <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Candidate</p>
+                        </header>
+                        <pre><code class="javascript" data-trim contenteditable>
+' \t \n Lorem ipsum   \t\n'.trimLeft(); // 'Lorem ipsum   \t\n';
+                        </code></pre>
+                    </section>
 
-<!--CANDIDATE-->
-<section>
-<h2>String.prototype.trimRight</h2>
-<p>right trims the string</p>
-<p>Stage: Candidate</p>
-<pre><code class="javascript" data-trim contenteditable>
+                    <!--CANDIDATE-->
+                    <section class="full">
+                        <header>
+                            <h2>String.prototype.trimRight</h2>
+                            <p style="margin-bottom:5px">right trims the string</p>
+                            <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Candidate</p>
+                        <header>
+                        <pre><code class="javascript" data-trim contenteditable>
 ' \t \n RightTrim   \t\n'.trimRight(); // ' \t \n RightTrim';
-</code></pre>
-</section>
+                        </code></pre>
+                    </section>
 
 
-<!--DRAFT-->
-<section>
-<h2>Object Observe</h2>
-<p>Asynchronously observing the changes to an object</p>
-<p>Stage: Draft.</p>
-<pre><code class="javascript" data-trim contenteditable>
-var obj = {};
+                <!--DRAFT-->
+                <section class="full">
+                    <header>
+                        <h2>Object Observe</h2>
+                        <p style="margin-bottom:5px">Asynchronously observing the changes to an object</p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Draft.</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
+let obj = {};
+Object.observe(obj, (changes) => { 
+    console.log(changes); 
+});
+obj.name = "ciasteczko";
 
-Object.observe( obj,function(changes) {console.log(changes);} );
+// [{ type: 'new', object: { name: 'ciasteczko' }, name: 'name' }]
+                    </code></pre>
+                </section>
 
-obj.name = "hemanth";
-
-// Would log -> [ { type: 'new', object: { name: 'hemanth' }, name: 'name' } ]
-</code></pre>
-</section>
-
-<!--DRAFT-->
-<section>
-<h2>Array.prototype.includes</h2>
-<p>Determines whether an array includes a certain element or not</p>
-<p>Stage: Draft</p>
-<pre><code class="javascript" data-trim contenteditable>
+                <!--DRAFT-->
+                <section class="full">
+                    <header>
+                        <h2>Array.prototype.includes</h2>
+                        <p style="margin-bottom:5px">Determines whether an array includes a certain element or not</p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Draft</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
 [1, 2, 3].includes(3, 0, 7); // true
 [1, 2, NaN].includes(NaN); // true
 [0,+1,-1].includes(42); // false
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
 
-<!--PROPOSAL-->
-<section>
-<h2>Single Instruction Multiple Data (SIMD)</h2>
-<p>Stage: Proposal</p>
-<pre><code class="javascript" data-trim contenteditable>
+                <!--PROPOSAL-->
+                <section class="full">
+                    <header>
+                        <h style="margin-bottom:5px"2>Single Instruction Multiple Data (SIMD)</h2>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Proposal</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
 let a = SIMD.Float32x4(1.0, 2.0, 3.0, 4.0);
 let b = SIMD.Float32x4.extractLane(a, 0); // 1.0
 
@@ -165,264 +183,307 @@ let c = SIMD.Float32x4.replaceLane(a, 0, 5.0); // 5.0, 2.0, 3.0, 4.0
 let d = SIMD.Float32x4.add(a,b); // 6, 12, 18, 24
 
 // SIMD.Float32x4, SIMD.Float64x2, SIMD.Int8x16, SIMD.Int16x8, SIMD.Int32x4
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
-<!--PROPOSAL-->
-<section>
-<h2>Async functions</h2>
-<p>Deferred Functions<p>
-<p>Stage: Proposal</p>
-<pre><code class="javascript" data-trim contenteditable>
-function wait(t){
-return new Promise((r) => setTimeout(r, t));
+                <!--PROPOSAL-->
+                <section class="full">
+                    <header>
+                        <h2>Async functions</h2>
+                        <p style="margin-bottom:5px">Deferred Functions<p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Proposal</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
+function wait(t) {
+    return new Promise((r) => setTimeout(r, t));
 }
 
-async function asyncMania(){
-console.log("1");
-await wait(1000);
-console.log("2");
+async function asyncMania() {
+    console.log("1");
+    await wait(1000);
+    console.log("2");
 }
 
 asyncMania()
 .then(() => console.log("3"));
 
 // logs: 1 2 3
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
-<!--PROPOSAL-->
-<section>
-<h2>Async generators</h2>
-<p>Deferred generators</p>
-<p>Stage: Proposal.</p>
-<pre><code class="javascript" data-trim contenteditable>
+                <!--PROPOSAL-->
+                <section class="full">
+                    <header>
+                        <h2>Async generators</h2>
+                        <p style="margin-bottom:5px">Deferred generators</p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Proposal.</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
 // provider
 async function* nums() {
-yield 1;
-yield 2;
-yield 3;
+    yield 1;
+    yield 2;
+    yield 3;
 }
 
 // consumer
 async function printData() {
-for(var x on nums()) {
-console.log(x);
+    for(var x on nums()) {
+        console.log(x);
+    }
 }
-}
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
-<!--PROPOSAL-->
-<section>
-<h2>Typed Objects</h2>
-<p>Portable, memory-safe, efficient, and structured access to contiguously allocated data.</p>
-<p>Stage: Proposal</p>
-<pre><code class="javascript" data-trim contenteditable>
+                <!--PROPOSAL-->
+                <section class="full">
+                    <header>
+                        <h2>Typed Objects</h2>
+                        <p style="margin-bottom:5px">Portable, memory-safe, efficient, and structured access to contiguously allocated data.</p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Proposal</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
 var Point = new StructType({
-x: int32,
-y: int32
+    x: int32,
+    y: int32
 });
 
 var point = new Point({
-x: 42,
-y: 420
+    x: 42,
+    y: 420
 });
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
-<!--PROPOSAL-->
-<section>
-<h2>Trailing commas in function syntax</h2>
-<p>Trailing commas in parameter and argument lists</p>
-<p>Stage: Proposal</p>
-<pre><code class="javascript" data-trim contenteditable>
+                <!--PROPOSAL-->
+                <section class="full">
+                    <header>
+                        <h2>Trailing commas in function syntax</h2>
+                        <p style="margin-bottom:5px">Trailing commas in parameter and argument lists</p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Proposal</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
 var meow = function (cat1, cat2,) {}
 
 Math.max(4,2,0,);
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
-<!--PROPOSAL-->
-<section>
-<h2>Class decorators</h2>
-<p>Annotate and modify classes and properties at design time.</p>
-<p>Stage: Proposal</p>
-<pre><code class="javascript" data-trim contenteditable>
+                <!--PROPOSAL-->
+                <section class="full">
+                    <header>
+                        <h2>Class decorators</h2>
+                        <p style="margin-bottom:5px">Annotate and modify classes and properties at design time.</p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Proposal</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
 class Person {
-@cantEnum
-get kidCount() { return this.children.length; }
+    @cantEnum
+    get kidCount() { return this.children.length; }
 }
 
 function cantEnum(target, name, descriptor) {
-descriptor.enumerable = false;
-return descriptor;
+    descriptor.enumerable = false;
+    return descriptor;
 }
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
 
-<!--STRAWMAN-->
-<section>
-<h2>Object.getOwnPropertyDescriptors</h2>
-<p>Returns a property descriptor for an own property</p>
-<p>Stage: Strawman.</p>
-<pre><code class="javascript" data-trim contenteditable>
+                <!--STRAWMAN-->
+                <section class="full">
+                    <header>
+                        <h2>Object.getOwnPropertyDescriptors</h2>
+                        <p style="margin-bottom:5px">Returns a property descriptor for an own property</p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Strawman.</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
 // Creating a shallow copy.
 var shallowCopy = Object.create(
-Object.getPrototypeOf(originalObject),
-Object.getOwnPropertyDescriptors(originalObject)
+    Object.getPrototypeOf(originalObject),
+    Object.getOwnPropertyDescriptors(originalObject)
 );
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
 
-<!--STRAWMAN-->
-<section>
-<h2>Class properties</h2>
-<p>Properties of class</p>
-<p>Stage: Strawman</p>
-<pre><code class="javascript" data-trim contenteditable>
+                <!--STRAWMAN-->
+                <section class="full">
+                    <header>
+                        <h2>Class properties</h2>
+                        <p style="margin-bottom:5px">Properties of class</p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Strawman</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
 class Cat {
-name = 'Garfield';
-static says = 'meow';
+    name = 'Garfield';
+    static says = 'meow';
 }
+
 new Cat().name; // Garfield
 Cat.says; // meow
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
-<!--STRAWMAN-->
-<section>
-<h2>Map.prototype.toJSON</h2>
-<p>toJSON for Maps</p>
-<p>Stage: Strawman</p>
-<pre><code class="javascript" data-trim contenteditable>
+                <!--STRAWMAN-->
+                <section class="full">
+                    <header>
+                        <h2>Map.prototype.toJSON</h2>
+                        <p style="margin-bottom:5px">toJSON for Maps</p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Strawman</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
 var myMap = new Map();
 myMap.set(NaN, "not a number");
 
 console.log(myMap.toJSON()); // {"NaN":"not a number"}
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
-<!--STRAWMAN-->
-<section>
-<h2>Set.prototype.toJSON</h2>
-<p>toJSON for Sets</p>
-<p>Stage: Strawman</p>
-<pre><code class="javascript" data-trim contenteditable>
+                <!--STRAWMAN-->
+                <section class="full">
+                    <header>
+                        <h2>Set.prototype.toJSON</h2>
+                        <p style="margin-bottom:5px">toJSON for Sets</p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Strawman</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
 var mySet = new Set();
 mySet.add(NaN);
 mySet.add(1);
 console.log(mySet.toJSON()) // {"1":1,"NaN":null}
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
-<!--STRAWMAN-->
-<section>
-<h2>String.prototype.at</h2>
-<p>String containing the code point at the given position</p>
-<p>Stage: Strawman</p>
-<pre><code class="javascript" data-trim contenteditable>
+                <!--STRAWMAN-->
+                <section class="full">
+                    <header>
+                        <h2>String.prototype.at</h2>
+                        <p style="margin-bottom:5px">String containing the code point at the given position</p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Strawman</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
 'abc\uD834\uDF06def'.at(1) // 'b'
 'abc\uD834\uDF06def'.at(3) // '\uD834\uDF06'
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
-<!--STRAWMAN-->
-<section>
-<h2>Object rest properties</h2>
-<p>Rest properties for object destructuring assignment</p>
-<p>Stage: Strawman</p>
-<pre><code class="javascript" data-trim contenteditable>
-let { fname, lname, ...rest } = { fname: "Hemanth", lname: "HM", location: "Earth", type: "Human" };
+                <!--STRAWMAN-->
+                <section class="full">
+                    <header>
+                        <h2>Object rest properties</h2>
+                        <p style="margin-bottom:5px">Rest properties for object destructuring assignment</p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Strawman</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
+let { fname, lname, ...rest } = { 
+    fname: "Hemanth", 
+    lname: "HM", 
+    location: "Earth", 
+    type: "Human" 
+};
+
 fname; //"Hemanth"
 lname; //"HM"
 rest; // { location: "Earth", type: "Human" }
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
-<!--STRAWMAN-->
-<section>
-<h2>Object spread properties</h2>
-<p>Spread properties for object destructuring assignment</p>
-<p>Stage: Strawman</p>
-<pre><code class="javascript" data-trim contenteditable>
+                <!--STRAWMAN-->
+                <section class="full">
+                    <header>
+                        <h2>Object spread properties</h2>
+                        <p style="margin-bottom:5px">Spread properties for object destructuring assignment</p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Strawman</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
 let info = {fname, lname, ...rest};
 
 info; // { fname: "Hemanth", lname: "HM", location: "Earth", type: "Human" }
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
-<!--STRAWMAN-->
-<section>
-<h2>String.prototype.lpad</h2>
-<p>left justify and pad strings</p>
-<p>Stage: Strawman</p>
-<pre><code class="javascript" data-trim contenteditable>
+                <!--STRAWMAN-->
+                <section class="full">
+                    <header>
+                        <h2>String.prototype.lpad</h2>
+                        <p style="margin-bottom:5px">left justify and pad strings</p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Strawman</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
 "hello".lpad(4)            #=> "hello"
 "hello".lpad(20)           #=> "hello               "
 "hello".lpad(20, '1234')   #=> "hello123412341234123"
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
-<!--STRAWMAN-->
-<section>
-<h2>String.prototype.padRight</h2>
-<p>right justify and pad strings</p>
-<p>Stage: Strawman</p>
-<pre><code class="javascript" data-trim contenteditable>
-"hello".padRight(4)            #=> "hello"
-"hello".padRight(20)           #=> "               hello"
-"hello".padRight(20, '1234')   #=> "123412341234123hello"
-</code></pre>
-</section>
+                <!--STRAWMAN-->
+                <section class="full">
+                    <header>
+                        <h2>String.prototype.padRight</h2>
+                        <p style="margin-bottom:5px">right justify and pad strings</p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Strawman</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
+"hello".padRight(4)            // "hello"
+"hello".padRight(20)           // "               hello"
+"hello".padRight(20, '1234')   // "123412341234123hello"
+                    </code></pre>
+                </section>
 
-<!--STRAWMAN-->
-<section>
-<h2>Regexp.escape</h2>
-<p>Escapes any characters that would have special meaning in a regular expression</p>
-<p>Stage: Strawaman</p>
-<pre><code class="javascript" data-trim contenteditable>
+                <!--STRAWMAN-->
+                <section class="full">
+                    <header>
+                        <h2>Regexp.escape</h2>
+                        <p style="margin-bottom:5px">Escapes any characters that would have special meaning in a regular expression</p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Strawaman</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
 RegExp.escape("(*.*)"); // "\(\*\.\*\)"
 RegExp.escape("｡^･ｪ･^｡") // "｡\^･ｪ･\^｡"
 RegExp.escape("😊 *_* +_+ ... 👍"); // "😊 \*_\* \+_\+ \.\.\. 👍"
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
 
-<!--SHALL-REACH-STRAWMAN-->
-<section>
-<h2>Object.values</h2>
-<p>Get all the values of the object as an array</p>
-<p>Stage: Shall reach Strawman</p>
-<pre><code class="javascript" data-trim contenteditable>
+                <!--SHALL-REACH-STRAWMAN-->
+                <section class="full">
+                    <header>
+                        <h2>Object.values</h2>
+                        <p style="margin-bottom:5px">Get all the values of the object as an array</p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Shall reach Strawman</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
 var person = { fname: "Hemanth", lname: "HM", location: "Earth", type: "Human" };
 
 Object.values(person);
 //^ ["Hemanth","HM","Earth","Human"]
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
-<!--SHALL-REACH-STRAWMAN-->
-<section>
-<h2>Object.entries</h2>
-<p>Returns a Array of arrays of key,value pairs</p>
-<p>Stage: Shall reach Strawman</p>
-<pre><code class="javascript" data-trim contenteditable>
+                <!--SHALL-REACH-STRAWMAN-->
+                <section class="full">
+                    <header>
+                        <h2>Object.entries</h2>
+                        <p style="margin-bottom:5px">Returns a Array of arrays of key,value pairs</p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Shall reach Strawman</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
 var person = { fname: "Hemanth", lname: "HM", location: "Earth", type: "Human" };
 
 Object.entries(person);
 //^ [["fname","Hemanth"],["lname","HM"],["location","Earth"],["type","Human"]]
-</code></pre>
-</section>
+                    </code></pre>
+                </section>
 
-<!--SHALL-REACH-STRAWMAN-->
-<section>
-<h2>Bind Operator</h2>
-<p>:: Function binding and method extraction</p>
-<p>Stage: Shall reach Strawman</p>
-<pre><code class="javascript" data-trim contenteditable>
+                <!--SHALL-REACH-STRAWMAN-->
+                <section class="full">
+                    <header>
+                        <h2>Bind Operator</h2>
+                        <p style="margin-bottom:5px">:: Function binding and method extraction</p>
+                        <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Shall reach Strawman</p>
+                    </header>
+                    <pre><code class="javascript" data-trim contenteditable>
 let log = (level, msg) => ::console[level](msg);
 
 import { map, takeWhile, forEach } from "iterlib";
@@ -431,10 +492,10 @@ getPlayers()
 ::map(x => x.character())
 ::takeWhile(x => x.strength > 100)
 ::forEach(x => console.log(x));
-</code></pre>
-</section>
-
+                    </code></pre>
                 </section>
+
+            </section>
 
 
 
@@ -468,7 +529,7 @@ getPlayers()
 
 
                 <section>
-                    <h2>linki</h2>
+                    <h2>links</h2>
                     <ul>
                         <li>
                             <a href="http://tc39wiki.calculist.org/about/people/">
@@ -483,6 +544,11 @@ getPlayers()
                         <li>
                             <a href="https://github.com/hemanth/es7-features">
                                 List of ES7 features
+                            </a>
+                        </li> 
+                        <li>
+                            <a href="http://developer.telerik.com/featured/hail-babel-the-transpiling-overlord/">
+                                Hail, Babel! The Transpiling Overlord (Q&A)
                             </a>
                         </li>
                     </ul>
