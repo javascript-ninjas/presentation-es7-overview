@@ -207,7 +207,7 @@ async function asyncMania() {
 asyncMania()
 .then(() => console.log("3"));
 
-// logs: 1 2 3
+// 1 2 3
                     </code></pre>
                 </section>
 
@@ -232,6 +232,8 @@ async function printData() {
         console.log(x);
     }
 }
+
+// for...on loop for consuming data via observation.
                     </code></pre>
                 </section>
 
@@ -277,15 +279,14 @@ Math.max(4,2,0,);
                         <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Proposal</p>
                     </header>
                     <pre><code class="javascript" data-trim contenteditable>
-class Person {
-    @cantEnum
-    get kidCount() { return this.children.length; }
+class Meal {
+    @readonly
+    entree = 'steak';
 }
 
-function cantEnum(target, name, descriptor) {
-    descriptor.enumerable = false;
-    return descriptor;
-}
+let dinner = new Meal();
+dinner.entree = 'salmon';
+// Cannot assign to read only property 'entree' of [object Object]
                     </code></pre>
                 </section>
 
@@ -298,11 +299,20 @@ function cantEnum(target, name, descriptor) {
                         <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Strawman.</p>
                     </header>
                     <pre><code class="javascript" data-trim contenteditable>
-// Creating a shallow copy.
-var shallowCopy = Object.create(
-    Object.getPrototypeOf(originalObject),
-    Object.getOwnPropertyDescriptors(originalObject)
-);
+var o, d;
+
+o = { get foo() { return 17; } };
+d = Object.getOwnPropertyDescriptor(o, 'foo');
+// d is { configurable: true, enumerable: true, get: /*the getter function*/, set: undefined }
+
+o = { bar: 42 };
+d = Object.getOwnPropertyDescriptor(o, 'bar');
+// d is { configurable: true, enumerable: true, value: 42, writable: true }
+
+o = {};
+Object.defineProperty(o, 'baz', { value: 8675309, writable: false, enumerable: false });
+d = Object.getOwnPropertyDescriptor(o, 'baz');
+// d is { value: 8675309, writable: false, enumerable: false, configurable: false }
                     </code></pre>
                 </section>
 
@@ -399,7 +409,7 @@ rest; // { location: "Earth", type: "Human" }
                     <pre><code class="javascript" data-trim contenteditable>
 let info = {fname, lname, ...rest};
 
-info; // { fname: "Hemanth", lname: "HM", location: "Earth", type: "Human" }
+// { fname: "Hemanth", lname: "HM", location: "Earth", type: "Human" }
                     </code></pre>
                 </section>
 
@@ -411,9 +421,9 @@ info; // { fname: "Hemanth", lname: "HM", location: "Earth", type: "Human" }
                         <p style="font-size:24px;margin:5px 0 30px 0;">Stage: Strawman</p>
                     </header>
                     <pre><code class="javascript" data-trim contenteditable>
-"hello".lpad(4)            #=> "hello"
-"hello".lpad(20)           #=> "hello               "
-"hello".lpad(20, '1234')   #=> "hello123412341234123"
+"hello".lpad(4)            // "hello"
+"hello".lpad(20)           // "hello               "
+"hello".lpad(20, '1234')   // "hello123412341234123"
                     </code></pre>
                 </section>
 
@@ -457,7 +467,7 @@ RegExp.escape("😊 *_* +_+ ... 👍"); // "😊 \*_\* \+_\+ \.\.\. 👍"
 var person = { fname: "Hemanth", lname: "HM", location: "Earth", type: "Human" };
 
 Object.values(person);
-//^ ["Hemanth","HM","Earth","Human"]
+// ["Hemanth","HM","Earth","Human"]
                     </code></pre>
                 </section>
 
@@ -472,7 +482,7 @@ Object.values(person);
 var person = { fname: "Hemanth", lname: "HM", location: "Earth", type: "Human" };
 
 Object.entries(person);
-//^ [["fname","Hemanth"],["lname","HM"],["location","Earth"],["type","Human"]]
+// [["fname","Hemanth"], ["lname","HM"], ["location","Earth"], ["type","Human"]]
                     </code></pre>
                 </section>
 
@@ -485,13 +495,10 @@ Object.entries(person);
                     </header>
                     <pre><code class="javascript" data-trim contenteditable>
 let log = (level, msg) => ::console[level](msg);
+// ES6: console[level].call(console, msg) 
 
-import { map, takeWhile, forEach } from "iterlib";
-
-getPlayers()
-::map(x => x.character())
-::takeWhile(x => x.strength > 100)
-::forEach(x => console.log(x));
+$(".some-link").on("click", ::view.reset);
+// ES6: $(".some-link").on("click", view.reset.bind(view));
                     </code></pre>
                 </section>
 
